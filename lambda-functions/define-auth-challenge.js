@@ -9,6 +9,14 @@ Lambda function for the Cognito trigger "Define Auth Challenge"
 exports.handler = async (event) => {
 	console.log('RECEIVED event: ', JSON.stringify(event, null, 2));
 
+	// If user is not registered
+	if (event.request.userNotFound) {
+		console.log('User does not exist');
+		event.response.issueToken = false;
+		event.response.failAuthentication = true;
+		throw new Error('User does not exist');
+	}
+
 	if (
 		event.request.session &&
 		event.request.session.length &&
@@ -41,6 +49,7 @@ exports.handler = async (event) => {
 		);
 		event.response.issueTokens = false;
 		event.response.failAuthentication = true;
+		throw new Error('Invalid OTP');
 	}
 	// The user did not provide a correct answer yet; present CUSTOM_CHALLENGE again
 	else {
