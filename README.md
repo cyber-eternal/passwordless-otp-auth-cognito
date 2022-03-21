@@ -14,9 +14,14 @@ We want our users to use their phone numbers as the username. Hence in the attri
 
 To make our sign up process even simpler we won’t require any standard or custom attributes from the user.
 
+![Cognito Attributes](./tmp/cognito/attributes.png)
+
 ### Policies
 
 The only thing that matters in this section is to “ **Allow users to sign themselves up** “.
+
+![Cognito Policies](./tmp/cognito/policies.png)
+
 
 ### MFA and Verifications
 
@@ -26,12 +31,15 @@ Account recovery is also not applicable for us, so we will select “ **None –
 
 We don’t need verification as well, because the phone number is implicitly verified every time user signs in using the OTP. Select “ **No Verification** “.
 
+![Cognito MFA](./tmp/cognito/MFA-and-verifications.png)
+
 ### App Clients
 
 Click “ **Add an App Client”** . Provide a name for the App Client and make sure you uncheck “ **Generate Client Secret** “.
 
 AWS Cognito doesn’t support passwordless authentication out of the box. So, we will select “ **Enable lambda trigger-based custom authentication** ” and uncheck other configurations.
 
+![Cognito Policies](./tmp/cognito/client.png)
 
 ## Custom authentication challenge Lambda triggers diagram
 
