@@ -1,26 +1,22 @@
-import cdk = require('@aws-cdk/core');
-import cognito = require('@aws-cdk/aws-cognito');
 import { CfnUserPool } from '@aws-cdk/aws-cognito';
 import { Duration } from '@aws-cdk/core';
-import lambda = require('@aws-cdk/aws-lambda');
-import iam = require('@aws-cdk/aws-iam');
+import * as iam from '@aws-cdk/aws-iam';
+import * as lambda from '@aws-cdk/aws-lambda';
+import * as cdk from '@aws-cdk/core';
+import * as cognito from '@aws-cdk/aws-cognito';
 
 export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 	constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
 		super(scope, id, props);
 
-		/* #region  Cognito UserPool & App Client for Main APP */
-
 		const PRE_SIGNUP = new lambda.Function(
 			this,
-			'phone-only-password-less-pre-sign-up-function',
+			'passwordless-phone-number-pre-sign-up-function',
 			{
-				functionName: 'phone-only-password-less-pre-sign-up',
-				runtime: lambda.Runtime.NODEJS_12_X,
-				code: lambda.Code.asset(
-					'lib/aws-cognito/phone-only-password-less/pre-signup-lambda'
-				), // your function directory
-				handler: 'pre-signup-lambda.handler',
+				functionName: 'passwordless-phone-number-pre-sign-up-function',
+				runtime: lambda.Runtime.NODEJS_14_X,
+				code: lambda.Code.fromAsset('../lambda-functions'),
+				handler: 'pre-sign-up.handler',
 				timeout: Duration.seconds(3),
 				memorySize: 128,
 				initialPolicy: [
@@ -34,14 +30,12 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 
 		const DEFINE_AUTH_CHALLENGE = new lambda.Function(
 			this,
-			'phone-only-password-less-define-auth-challenge-function',
+			'passwordless-phone-number-define-auth-challenge-function1',
 			{
-				functionName: 'phone-only-password-less-define-auth-challenge',
-				runtime: lambda.Runtime.NODEJS_12_X,
-				code: lambda.Code.asset(
-					'lib/aws-cognito/phone-only-password-less/define-auth-challenge-lambda'
-				), // your function directory
-				handler: 'define-auth-challenge-lambda.handler',
+				functionName: 'passwordless-phone-number-define-auth-challenge1',
+				runtime: lambda.Runtime.NODEJS_14_X,
+				code: lambda.Code.fromAsset('../lambda-functions'),
+				handler: 'define-auth-challenge.handler',
 				timeout: Duration.seconds(3),
 				memorySize: 128,
 				initialPolicy: [
@@ -55,14 +49,12 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 
 		const CREATE_AUTH_CHALLENGE = new lambda.Function(
 			this,
-			'phone-only-password-less-create-auth-challenge-function',
+			'passwordless-phone-number-create-auth-challenge-function1',
 			{
-				functionName: 'phone-only-password-less-create-auth-challenge',
-				runtime: lambda.Runtime.NODEJS_12_X,
-				code: lambda.Code.asset(
-					'lib/aws-cognito/phone-only-password-less/create-auth-challenge-lambda'
-				), // your function directory
-				handler: 'create-auth-challenge-lambda.handler',
+				functionName: 'passwordless-phone-number-create-auth-challenge1',
+				runtime: lambda.Runtime.NODEJS_14_X,
+				code: lambda.Code.fromAsset('../lambda-functions'),
+				handler: 'create-auth-challenge.handler',
 				timeout: Duration.seconds(3),
 				memorySize: 128,
 				initialPolicy: [
@@ -76,14 +68,12 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 
 		const VERIFY_AUTH_CHALLENGE = new lambda.Function(
 			this,
-			'phone-only-password-less-verify-auth-challenge-function',
+			'passwordless-phone-number-verify-auth-challenge-function1',
 			{
-				functionName: 'phone-only-password-less-verify-auth-challenge',
-				runtime: lambda.Runtime.NODEJS_12_X,
-				code: lambda.Code.asset(
-					'lib/aws-cognito/phone-only-password-less/verify-auth-challenge-lambda'
-				), // your function directory
-				handler: 'verify-auth-challenge-lambda.handler',
+				functionName: 'passwordless-phone-number-verify-auth-challenge1',
+				runtime: lambda.Runtime.NODEJS_14_X,
+				code: lambda.Code.fromAsset('../lambda-functions'),
+				handler: 'verify-auth-challenge-response.handler',
 				timeout: Duration.seconds(3),
 				memorySize: 128,
 				initialPolicy: [
@@ -97,9 +87,9 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 
 		const PHONE_ONLY_PASSWORD_LESS_USER_POOL = new cognito.UserPool(
 			this,
-			'phone-only-password-less-userpool',
+			'passwordless-phone-number-userpool',
 			{
-				userPoolName: 'phone-only-password-less-userpool',
+				userPoolName: 'passwordless-phone-number-userpool',
 				signInAliases: {
 					phone: true,
 				},
@@ -134,17 +124,17 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 				},
 			}
 		);
+
 		const APPCLIENT = new cognito.UserPoolClient(
 			this,
-			'phone-only-password-less-userpool-app-client',
+			'passwordless-phone-number-userpool-app-client',
 			{
 				userPool: PHONE_ONLY_PASSWORD_LESS_USER_POOL,
 				generateSecret: false,
 				preventUserExistenceErrors: true,
-				userPoolClientName: 'phone-only-password-less-userpool-app-client',
+				userPoolClientName: 'passwordless-phone-number-userpool-app-client',
 				authFlows: {
-					custom: true, // CUST_AUTH_FLOW
-					// refreshToken: true,
+					custom: true,
 				},
 			}
 		);
@@ -159,6 +149,6 @@ export class PhoneOnlyPasswordLessStack extends cdk.Stack {
 				},
 			],
 		};
-		cfnUserPool.tags.setTag('project', 'phone-only-password-less-userpool');
+		cfnUserPool.tags.setTag('project', 'passwordless-phone-number-userpool');
 	}
 }

@@ -103,3 +103,8 @@ dist
 # TernJS port file
 .tern-port
 .DS_Store
+cdk/cdk.out/cdk.out
+.gitignore
+cdk/bin/cdk.d.ts
+cdk/bin/cdk.js
+cdk/lib/phone-only-password-less-stack.js

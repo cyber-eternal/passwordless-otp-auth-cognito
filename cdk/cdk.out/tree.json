@@ -1,0 +1,1152 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.149.0"
+        }
+      },
+      "PhoneOnlyPasswordLessStack": {
+        "id": "PhoneOnlyPasswordLessStack",
+        "path": "PhoneOnlyPasswordLessStack",
+        "children": {
+          "passwordless-phone-number-pre-sign-up-function": {
+            "id": "passwordless-phone-number-pre-sign-up-function",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "lambda:*",
+                                    "sns:*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "passwordlessphonenumberpresignupfunctionServiceRoleDefaultPolicyB365A5B8",
+                            "roles": [
+                              {
+                                "Ref": "passwordlessphonenumberpresignupfunctionServiceRole5C2472E3"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.149.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3Bucket9DBEF084"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberpresignupfunctionServiceRole5C2472E3",
+                        "Arn"
+                      ]
+                    },
+                    "functionName": "passwordless-phone-number-pre-sign-up-function",
+                    "handler": "pre-sign-up.handler",
+                    "memorySize": 128,
+                    "runtime": "nodejs14.x",
+                    "timeout": 3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.149.0"
+                }
+              },
+              "PreSignUpCognito": {
+                "id": "PreSignUpCognito",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-pre-sign-up-function/PreSignUpCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberpresignupfunction6C33AF41",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.149.0"
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "PhoneOnlyPasswordLessStack/AssetParameters",
+            "children": {
+              "683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765": {
+                "id": "683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765",
+                "path": "PhoneOnlyPasswordLessStack/AssetParameters/683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "PhoneOnlyPasswordLessStack/AssetParameters/683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "PhoneOnlyPasswordLessStack/AssetParameters/683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "PhoneOnlyPasswordLessStack/AssetParameters/683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.149.0"
+            }
+          },
+          "passwordless-phone-number-define-auth-challenge-function1": {
+            "id": "passwordless-phone-number-define-auth-challenge-function1",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "lambda:*",
+                                    "sns:*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "passwordlessphonenumberdefineauthchallengefunction1ServiceRoleDefaultPolicy9DD2C4A0",
+                            "roles": [
+                              {
+                                "Ref": "passwordlessphonenumberdefineauthchallengefunction1ServiceRole2AD06147"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.149.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3Bucket9DBEF084"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberdefineauthchallengefunction1ServiceRole2AD06147",
+                        "Arn"
+                      ]
+                    },
+                    "functionName": "passwordless-phone-number-define-auth-challenge1",
+                    "handler": "define-auth-challenge.handler",
+                    "memorySize": 128,
+                    "runtime": "nodejs14.x",
+                    "timeout": 3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.149.0"
+                }
+              },
+              "DefineAuthChallengeCognito": {
+                "id": "DefineAuthChallengeCognito",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-define-auth-challenge-function1/DefineAuthChallengeCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberdefineauthchallengefunction11D2904B2",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.149.0"
+            }
+          },
+          "passwordless-phone-number-create-auth-challenge-function1": {
+            "id": "passwordless-phone-number-create-auth-challenge-function1",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "lambda:*",
+                                    "sns:*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "passwordlessphonenumbercreateauthchallengefunction1ServiceRoleDefaultPolicy62F03586",
+                            "roles": [
+                              {
+                                "Ref": "passwordlessphonenumbercreateauthchallengefunction1ServiceRole666E63D6"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.149.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3Bucket9DBEF084"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumbercreateauthchallengefunction1ServiceRole666E63D6",
+                        "Arn"
+                      ]
+                    },
+                    "functionName": "passwordless-phone-number-create-auth-challenge1",
+                    "handler": "create-auth-challenge.handler",
+                    "memorySize": 128,
+                    "runtime": "nodejs14.x",
+                    "timeout": 3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.149.0"
+                }
+              },
+              "CreateAuthChallengeCognito": {
+                "id": "CreateAuthChallengeCognito",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-create-auth-challenge-function1/CreateAuthChallengeCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumbercreateauthchallengefunction1DD54F624",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.149.0"
+            }
+          },
+          "passwordless-phone-number-verify-auth-challenge-function1": {
+            "id": "passwordless-phone-number-verify-auth-challenge-function1",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "lambda:*",
+                                    "sns:*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "passwordlessphonenumberverifyauthchallengefunction1ServiceRoleDefaultPolicyC076B554",
+                            "roles": [
+                              {
+                                "Ref": "passwordlessphonenumberverifyauthchallengefunction1ServiceRole5017C863"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                          "version": "1.149.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Policy",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.149.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.AssetStaging",
+                      "version": "1.149.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.BucketBase",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
+                  "version": "1.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3Bucket9DBEF084"
+                      },
+                      "s3Key": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Fn::Select": [
+                                0,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Fn::Select": [
+                                1,
+                                {
+                                  "Fn::Split": [
+                                    "||",
+                                    {
+                                      "Ref": "AssetParameters683215e686a64ca089d519fc823be751e743151a0448a7a84212faf3ff448765S3VersionKey3B851622"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberverifyauthchallengefunction1ServiceRole5017C863",
+                        "Arn"
+                      ]
+                    },
+                    "functionName": "passwordless-phone-number-verify-auth-challenge1",
+                    "handler": "verify-auth-challenge-response.handler",
+                    "memorySize": 128,
+                    "runtime": "nodejs14.x",
+                    "timeout": 3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                  "version": "1.149.0"
+                }
+              },
+              "VerifyAuthChallengeResponseCognito": {
+                "id": "VerifyAuthChallengeResponseCognito",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-verify-auth-challenge-function1/VerifyAuthChallengeResponseCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "passwordlessphonenumberverifyauthchallengefunction1FA3D62C3",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-lambda.Function",
+              "version": "1.149.0"
+            }
+          },
+          "passwordless-phone-number-userpool": {
+            "id": "passwordless-phone-number-userpool",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool",
+            "children": {
+              "smsRole": {
+                "id": "smsRole",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool/smsRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool/smsRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Condition": {
+                                "StringEquals": {
+                                  "sts:ExternalId": "PhoneOnlyPasswordLessStackpasswordlessphonenumberuserpoolBC6DBBF9"
+                                }
+                              },
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "cognito-idp.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policies": [
+                          {
+                            "policyName": "sns-publish",
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sns:Publish",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.149.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.149.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                  "aws:cdk:cloudformation:props": {
+                    "accountRecoverySetting": {
+                      "recoveryMechanisms": [
+                        {
+                          "name": "admin_only",
+                          "priority": 1
+                        }
+                      ]
+                    },
+                    "adminCreateUserConfig": {
+                      "allowAdminCreateUserOnly": false,
+                      "inviteMessageTemplate": {
+                        "emailMessage": "[TEST_APP]: Your username is {username} and temporary password is {####}.",
+                        "emailSubject": "[TEST_APP]: Your temporary password",
+                        "smsMessage": "[TEST_APP]: Your username is {username} and temporary password is {####}."
+                      }
+                    },
+                    "autoVerifiedAttributes": [
+                      "phone_number"
+                    ],
+                    "emailVerificationMessage": "The verification code to your new account is {####}",
+                    "emailVerificationSubject": "Verify your new account",
+                    "lambdaConfig": {
+                      "preSignUp": {
+                        "Fn::GetAtt": [
+                          "passwordlessphonenumberpresignupfunction6C33AF41",
+                          "Arn"
+                        ]
+                      },
+                      "defineAuthChallenge": {
+                        "Fn::GetAtt": [
+                          "passwordlessphonenumberdefineauthchallengefunction11D2904B2",
+                          "Arn"
+                        ]
+                      },
+                      "createAuthChallenge": {
+                        "Fn::GetAtt": [
+                          "passwordlessphonenumbercreateauthchallengefunction1DD54F624",
+                          "Arn"
+                        ]
+                      },
+                      "verifyAuthChallengeResponse": {
+                        "Fn::GetAtt": [
+                          "passwordlessphonenumberverifyauthchallengefunction1FA3D62C3",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "policies": {
+                      "passwordPolicy": {
+                        "temporaryPasswordValidityDays": 8,
+                        "minimumLength": 8,
+                        "requireLowercase": false,
+                        "requireUppercase": false,
+                        "requireNumbers": false,
+                        "requireSymbols": false
+                      }
+                    },
+                    "schema": [
+                      {
+                        "name": "phone_number",
+                        "mutable": true,
+                        "required": true
+                      }
+                    ],
+                    "smsConfiguration": {
+                      "externalId": "PhoneOnlyPasswordLessStackpasswordlessphonenumberuserpoolBC6DBBF9",
+                      "snsCallerArn": {
+                        "Fn::GetAtt": [
+                          "passwordlessphonenumberuserpoolsmsRole7E4FE4DE",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "smsVerificationMessage": "The verification code to your new account is {####}",
+                    "usernameAttributes": [
+                      "phone_number"
+                    ],
+                    "usernameConfiguration": {
+                      "caseSensitive": false
+                    },
+                    "userPoolName": "passwordless-phone-number-userpool",
+                    "userPoolTags": {
+                      "project": "passwordless-phone-number-userpool"
+                    },
+                    "verificationMessageTemplate": {
+                      "defaultEmailOption": "CONFIRM_WITH_CODE",
+                      "emailMessage": "The verification code to your new account is {####}",
+                      "emailSubject": "Verify your new account",
+                      "smsMessage": "The verification code to your new account is {####}"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-cognito.CfnUserPool",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cognito.UserPool",
+              "version": "1.149.0"
+            }
+          },
+          "passwordless-phone-number-userpool-app-client": {
+            "id": "passwordless-phone-number-userpool-app-client",
+            "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool-app-client",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "PhoneOnlyPasswordLessStack/passwordless-phone-number-userpool-app-client/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                  "aws:cdk:cloudformation:props": {
+                    "userPoolId": {
+                      "Ref": "passwordlessphonenumberuserpool743FBD6C"
+                    },
+                    "allowedOAuthFlows": [
+                      "implicit",
+                      "code"
+                    ],
+                    "allowedOAuthFlowsUserPoolClient": true,
+                    "allowedOAuthScopes": [
+                      "profile",
+                      "phone",
+                      "email",
+                      "openid",
+                      "aws.cognito.signin.user.admin"
+                    ],
+                    "callbackUrLs": [
+                      "https://example.com"
+                    ],
+                    "clientName": "passwordless-phone-number-userpool-app-client",
+                    "explicitAuthFlows": [
+                      "ALLOW_CUSTOM_AUTH",
+                      "ALLOW_REFRESH_TOKEN_AUTH"
+                    ],
+                    "generateSecret": false,
+                    "preventUserExistenceErrors": "ENABLED",
+                    "supportedIdentityProviders": [
+                      "COGNITO"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-cognito.CfnUserPoolClient",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-cognito.UserPoolClient",
+              "version": "1.149.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "PhoneOnlyPasswordLessStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "PhoneOnlyPasswordLessStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.149.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.149.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.149.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.149.0"
+    }
+  }
+}
