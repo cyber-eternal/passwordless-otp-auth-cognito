@@ -1,6 +1,11 @@
 {
   "name": "cdk",
   "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Edgar Sargsyan",
+    "email": "edgar@sargsyan.dev"
+  },
   "bin": {
     "cdk": "bin/cdk.js"
   },
@@ -21,7 +26,6 @@
     "@aws-cdk/aws-cognito": "1.149.0",
     "@aws-cdk/aws-iam": "^1.149.0",
     "@aws-cdk/aws-lambda": "^1.149.0",
-    "@aws-cdk/core": "1.149.0",
-    "source-map-support": "^0.5.21"
+    "@aws-cdk/core": "1.149.0"
   }
 }

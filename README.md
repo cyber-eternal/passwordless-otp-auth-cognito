@@ -1,7 +1,5 @@
 # Passwordless Authentication with OTP(SMS) using AWS Cognito
 
-## Passwordless Authentication using Phone Number
-
 In passwordless authentication, a user needs to remember only their username which is usually a phone number or email. The process is similar to recovering a forgotten password but shorter and quicker.
 
 When a user enters their phone number, they will receive a one time password (OTP) to their phone then they have to enter it on the next screen.
@@ -21,7 +19,6 @@ To make our sign up process even simpler we won’t require any standard or cust
 The only thing that matters in this section is to “ **Allow users to sign themselves up** “.
 
 ![Cognito Policies](./tmp/cognito/policies.png)
-
 
 ### MFA and Verifications
 
@@ -154,6 +151,38 @@ Find more info [here](https://docs.aws.amazon.com/cognito/latest/developerguide/
 
 Find more info [here](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-define-auth-challenge.html)
 
+## **CDK**
+
+1. Go to the ` cdk` directory - `cd cdk`
+2. In `./bin/cdk.ts` replace the ACCOUNT_NUMBER by your AWS account number
+3. Configure your AWS CLI and add the access key and secret key of your AWS account with proper permissionsConfigure your aws cli and add access key and secret key of your aws account with proper permission
+   Example:
+   `export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY export AWS_REGION=YOUR_REGION`
+4. In the `cdk` directory run command
+   1. `yarn`
+   2. `yarn cdk bootstrap`
+   3. `yarn cdk deploy`
+5. After the successful deployment, you will be able to see the configured Cognito UserPool with the client and assigned proper lambda function triggers in your AWS ConsoleAfter the successfule deployment, you will be able to see the configured Cognito UserPool with the client and proper lambda function triggers in your AWS Consol
+
+## **Web client(Angular)**
+
+You can use provided web client to test your setups.
+
+How to use:
+
+1. Go to the `client/web` dierectory
+2. In `src/environments/environment.ts` replace the `YOUR_REGION`, `YOUR_USER_POOL_ID` and `YOUR_CLIENT_ID` with the proper values
+3. Run the web client
+   1. `yarn`
+   2. `yarn start`
+4. The web app client should be running at [http://localhost:4200]() allowing you to register a new user with full name and phone number and login with only the registered phone number.
+
 ### Useful recurses
 
 [AWS Doc](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html)
+
+
+
+### License Summary
+
+This sample code is made available under a modified MIT license. See the LICENSE file.

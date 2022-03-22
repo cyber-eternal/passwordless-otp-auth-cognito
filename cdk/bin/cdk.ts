@@ -3,5 +3,5 @@ import { PhoneOnlyPasswordLessStack } from '../lib/phone-only-password-less-stac
 
 const app = new cdk.App();
 new PhoneOnlyPasswordLessStack(app, 'PhoneOnlyPasswordLessStack', {
-	env: { region: 'us-east-1', account: '701768494004' },
+	env: { region: 'us-east-1', account: 'ACCOUNT_NUMBER' },
 });
