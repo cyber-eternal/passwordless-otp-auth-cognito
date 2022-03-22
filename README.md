@@ -163,6 +163,7 @@ Find more info [here](https://docs.aws.amazon.com/cognito/latest/developerguide/
    2. `yarn cdk bootstrap`
    3. `yarn cdk deploy`
 5. After the successful deployment, you will be able to see the configured Cognito UserPool with the client and assigned proper lambda function triggers in your AWS ConsoleAfter the successfule deployment, you will be able to see the configured Cognito UserPool with the client and proper lambda function triggers in your AWS Consol
+6. To delete generated AWS resources use `yarn cdk destroy` command
 
 ## **Web client(Angular)**
 
@@ -180,8 +181,6 @@ How to use:
 ### Useful recurses
 
 [AWS Doc](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html)
-
-
 
 ### License Summary
 
