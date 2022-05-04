@@ -186,7 +186,7 @@ How to use:
 
 - Author - [Edgar Sargsyan](https://github.com/cyber-eternal)
 - Website - [https://sargsyan.dev](https://sargsyan.dev)
-- Twitter - [@cybereternal](https://twitter.com/nestframework)
+- Twitter - [@cybereternal](https://twitter.com/cybereternal)
 
 ### License Summary
 
