@@ -182,6 +182,12 @@ How to use:
 
 [AWS Doc](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html)
 
+### Stay in touch
+
+- Author - [Edgar Sargsyan](https://github.com/cyber-eternal)
+- Website - [https://sargsyan.dev](https://sargsyan.dev)
+- Twitter - [@cybereternal](https://twitter.com/nestframework)
+
 ### License Summary
 
 This sample code is made available under a modified MIT license. See the LICENSE file.
